@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.AguardandoTokenPage"
+             Visual="Material"
+             BackgroundColor="{StaticResource Key=preto_lb}">
+    <StackLayout Orientation="Vertical"
+                 HorizontalOptions="CenterAndExpand"
+                 VerticalOptions="CenterAndExpand">
+        <Label Text="Aguardando liberação Token"
+               TextColor="{StaticResource Key=fundo_form}"
+               FontSize="Title"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               IsVisible="{Binding Aguardandoliberacao}"/>
+        <StackLayout Orientation="Vertical"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     IsVisible="{Binding Tokenliberado}">
+            <Label Text="Token Liberado"
+                   TextColor="{StaticResource Key=fundo_form}"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+            <Button x:Name="btnSalvar"
+                    Text="ACESSAR MAPA MESAS"
+                    BackgroundColor="{StaticResource Key=laranja_lb}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="FillAndExpand"
+                    CornerRadius="10"
+                    HeightRequest="40"
+                    Grid.Column="1"
+                    Command="{Binding AcessarMapaMesasCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

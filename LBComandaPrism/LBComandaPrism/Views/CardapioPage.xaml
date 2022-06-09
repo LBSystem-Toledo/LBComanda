@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:dxc="http://schemas.devexpress.com/xamarin/2014/forms/collectionview"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.CardapioPage"
+             x:Name="pCardapio"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material"
+             Title="CARDÁPIO">
+    <StackLayout Orientation="Vertical"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="CenterAndExpand">
+        <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="0"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand">
+            <Grid RowDefinitions="Auto,*,Auto">
+                <Frame HasShadow="True"
+                       BackgroundColor="LightGray"
+                       CornerRadius="5"
+                       Margin="10"
+                       Padding="2"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand">
+                    <Grid HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          ColumnDefinitions="*,Auto"
+                          RowDefinitions="Auto,Auto">
+                        <Picker x:Name="pkGrupos"
+                                Title="GRUPO PRODUTO"
+                                FontSize="16"
+                                HorizontalOptions="FillAndExpand"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="LightGray"
+                                ItemsSource="{Binding Grupos}"
+                                ItemDisplayBinding="{Binding Ds_grupo}"
+                                SelectedItem="{Binding Grupocorrente}"/>
+                        <SearchBar x:Name="sbProduto"
+                                   Grid.Row="1"
+                                   Text="{Binding Filtroproduto}"
+                                   Placeholder="Nome Produto"
+                                   SearchCommand="{Binding BuscarCommand}"/>
+                        <ImageButton Source="lupa.png"
+                                     CornerRadius="100"
+                                     HeightRequest="55"
+                                     WidthRequest="55"
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                                     Margin="5,5,5,5"
+                                     Command="{Binding BuscarCommand}"
+                                     CommandParameter="{Binding Text, Source={x:Reference sbProduto}}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                            <Setter Property="BackgroundColor" Value="{StaticResource Key=laranja_lb}"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+                    </Grid>
+                </Frame>
+                <dxc:DXCollectionView x:Name="cvProdutos"
+                                      Margin="10,2,10,10"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      SelectionMode="None"
+                                      ItemsSource="{Binding ProdutosOC}"
+                                      Grid.Row="1">
+                    <dxc:DXCollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HasShadow="True"
+                                   BorderColor="{StaticResource Key=laranja_lb}"
+                                   BackgroundColor="{Binding Cor}"
+                                   CornerRadius="5"
+                                   Margin="0,0,0,2"
+                                   Padding="5"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="FillAndExpand">
+                                <Grid RowDefinitions="Auto,Auto"
+                                      ColumnDefinitions="*,Auto,Auto">
+                                    <Label Text="{Binding Ds_produto}"
+                                           FontSize="Body"
+                                           TextColor="{StaticResource Key=preto_lb}"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="Start"
+                                           HorizontalTextAlignment="Start"
+                                           Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding PrecoVenda, StringFormat='{0:C}'}"
+                                           TextColor="{StaticResource Key=preto_lb}"
+                                           FontSize="Body"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Fill"
+                                           HorizontalTextAlignment="Start"
+                                           Grid.Column="2"/>
+                                    <Grid HorizontalOptions="Fill"
+                                          VerticalOptions="Fill"
+                                          Grid.Row="1"
+                                          Grid.ColumnSpan="3"
+                                          ColumnDefinitions="40,*,40">
+                                        <ImageButton Source="delete.png"
+                                                     IsVisible="{Binding ItemVendido}"
+                                                     Aspect="AspectFill"
+                                                     HorizontalOptions="Fill"
+                                                     VerticalOptions="Fill"
+                                                     Command="{Binding Source={x:Reference pCardapio}, Path=BindingContext.ExcluirItemCommand}"
+                                                     CommandParameter="{Binding .}"/>
+                                        <StackLayout Orientation="Horizontal"
+                                                     HorizontalOptions="Center"
+                                                     Grid.Column="1">
+                                            <ImageButton Source="menos.png"
+                                                         BackgroundColor="{StaticResource Key=fundo_form}"
+                                                         Aspect="AspectFill"
+                                                         WidthRequest="40"
+                                                         HorizontalOptions="Fill"
+                                                         VerticalOptions="Fill"
+                                                         Command="{Binding BindingContext.DelItemCompra, Source={x:Reference pCardapio}}"
+                                                         CommandParameter="{Binding .}"/>
+                                            <Label Text="{Binding Quantidade}"
+                                                   TextColor="{StaticResource Key=preto_lb}"
+                                                   FontSize="Subtitle"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="CenterAndExpand"/>
+                                            <ImageButton Source="somar.png"
+                                                         BackgroundColor="{StaticResource Key=fundo_form}"
+                                                         Aspect="AspectFill"
+                                                         WidthRequest="40"
+                                                         HorizontalOptions="Fill"
+                                                         VerticalOptions="Fill"
+                                                         Command="{Binding BindingContext.AddItemCompra, Source={x:Reference pCardapio}}"
+                                                         CommandParameter="{Binding .}"/>
+                                        </StackLayout>
+                                        <ImageButton Source="salvar.png"
+                                                     Aspect="AspectFill"
+                                                     HorizontalOptions="Fill"
+                                                     VerticalOptions="Fill"
+                                                     Grid.Column="2"
+                                                     Command="{Binding Source={x:Reference pCardapio}, Path=BindingContext.DetalheItemCommand}"
+                                                     CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </dxc:DXCollectionView.ItemTemplate>
+                    <dxc:DXCollectionView.GroupDescription>
+                        <dxc:GroupDescription FieldName="Ds_grupo"/>
+                    </dxc:DXCollectionView.GroupDescription>
+                    <dxc:DXCollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="2,0,18,10">
+                                <Label Text="{Binding Value}"
+                                       FontSize="Subtitle"
+                                       TextColor="{StaticResource Key=preto_lb}"
+                                       HorizontalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       FontAttributes="Bold"/>
+                                <BoxView BackgroundColor="AliceBlue"
+                                         HeightRequest="1"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </dxc:DXCollectionView.GroupHeaderTemplate>
+                </dxc:DXCollectionView>
+                <Grid VerticalOptions="Center"
+                      BackgroundColor="{StaticResource Key=laranja_lb}"
+                      Padding="5"
+                      IsVisible="{Binding ExisteSacola}"
+                      Grid.Row="2"
+                  ColumnDefinitions="*,Auto,*">
+                    <StackLayout Orientation="Vertical"
+                                 HorizontalOptions="CenterAndExpand"
+                                 VerticalOptions="StartAndExpand">
+                        <Label Text="Itens"
+                               TextColor="{StaticResource Key=preto_lb}"
+                               FontSize="Caption"
+                               FontAttributes="Bold"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="StartAndExpand"
+                               HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding ItensSacola}"
+                               Padding="0,-5,0,5"
+                               TextColor="White"
+                               FontSize="Caption"
+                               FontAttributes="Bold"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="StartAndExpand"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                    <Button x:Name="btnSacola"
+                            Text="VER CARRINHO"
+                            TextColor="White"
+                            FontSize="Caption"
+                            VerticalOptions="EndAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="{StaticResource Key=preto_lb}"
+                            Grid.Column="1"
+                            Command="{Binding VisualizarCarrinhoCommand}"/>
+                    <Label Text="{Binding ValorSacola, StringFormat='{0:C}'}"
+                           TextColor="White"
+                           FontSize="Micro"
+                           FontAttributes="Bold"
+                           Grid.Column="2"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Padding="10"/>
+                </Grid>
+            </Grid>
+        </Frame>
+        <Label Text="Aguardando liberação Token"
+               TextColor="{StaticResource Key=fundo_form}"
+               FontSize="Title"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               IsVisible="{Binding Aguardandoliberacao}"/>
+        <StackLayout Orientation="Vertical"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     IsVisible="{Binding Solicitartoken}">
+            <Label Text="Token Expirado"
+                   TextColor="{StaticResource Key=fundo_form}"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"/>
+            <Button x:Name="btnSalvar"
+                    Text="SOLICITAR TOKEN"
+                    BackgroundColor="{StaticResource Key=laranja_lb}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="FillAndExpand"
+                    CornerRadius="10"
+                    HeightRequest="40"
+                    Grid.Column="1"
+                    Command="{Binding SolicitarTokenCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

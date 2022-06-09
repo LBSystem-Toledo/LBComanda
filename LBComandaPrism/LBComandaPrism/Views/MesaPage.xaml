@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.MesaPage"
+             x:Name="pMesa">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Text="MAPA DE MESAS"
+               FontSize="Large"
+               BackgroundColor="#F08B27"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Grid.Column="0"
+               Grid.Row="0"/>
+        <CarouselView ItemsSource="{Binding Locais}"
+                      CurrentItem="{Binding LocalCurrent}"
+                      Grid.Column="0"
+                      Grid.Row="1">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="True"
+                        BorderColor="Orange"
+                        CornerRadius="5"
+                        Margin="20"
+                        HorizontalOptions="Center"
+                        VerticalOptions="CenterAndExpand">
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand">
+                            <Label Text="LOCAL: "
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                            <Label Text="{Binding Ds_local}"
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <CollectionView x:Name="cvMesa"
+                        ItemsSource="{Binding MesasLocal}"
+                        SelectionMode="Single"
+                        Grid.Column="0"
+                        Grid.Row="2">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="5"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Orange"
+                           CornerRadius="10"
+                           HasShadow="True"
+                           Padding="10,10,10,10"
+                           Margin="10,10,10,10">
+                        <Button Text="{Binding Nr_mesa}"
+                            FontAttributes="Bold"
+                            FontSize="Small"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"
+                            BackgroundColor="{Binding CorBotao}"
+                            Command="{Binding Source={x:Reference pMesa}, Path=BindingContext.MesaCommand}"
+                            CommandParameter="{Binding .}"/>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.NumeroCartaoPage"
+             BackgroundColor="{StaticResource Key=preto_lb}">
+    <Frame HasShadow="True"
+            BackgroundColor="{StaticResource Key=fundo_form}"
+            CornerRadius="5"
+            Margin="10,0,10,0"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center">
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand"
+              RowDefinitions="120,Auto">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icone_Transparente.png"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Margin="10,0,0,0"/>
+                <Label HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        FontSize="Large"
+                        FontFamily="SANSATION_BOLD">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="NUMERO"
+                                    FontSize="30"
+                                    TextColor="{StaticResource Key=laranja_lb}"/>
+                            <Span Text=" CARTÃO"
+                                    FontSize="24"
+                                    TextColor="{StaticResource Key=preto_lb}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Vertical"
+                         Grid.Row="1">
+                <Entry Placeholder="Numero Cartão"
+                       FontSize="Large"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                       Keyboard="Numeric"
+                       BackgroundColor="{StaticResource Key=fundo_form}"
+                       Text="{Binding Nr_cartao}"/>
+                <Button x:Name="btnSalvar"
+                        Text="CONFIRMAR"
+                        BackgroundColor="{StaticResource Key=laranja_lb}"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        CornerRadius="10"
+                        HeightRequest="60"
+                        Grid.Row="5"
+                        Margin="0,10,0,10"
+                        Command="{Binding ConfirmarCommand}"/>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentPage>

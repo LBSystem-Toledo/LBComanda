@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="http://prismlibrary.com"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="LBComandaPrism.Views.MenuPage"
+                  BackgroundColor="{StaticResource Key=preto_lb}">
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu"
+                     Padding="0">
+            <ContentPage.Content>
+                <StackLayout Padding="10">
+                    <Grid BackgroundColor="{StaticResource Key=preto_lb}"
+                          ColumnDefinitions="50,*"
+                          RowDefinitions="80,Auto">
+                        <Image Source="icone_Transparente.png"
+                               Aspect="AspectFit"
+                               Margin="10,0,0,0"/>
+                        <Label Grid.Column="1"
+                               Text="COMANDA FÁCIL"
+                               TextColor="White"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               FontSize="Title"
+                               FontFamily="SANSATION_BOLD"/>
+                        <Label Grid.ColumnSpan="2"
+                               Grid.Row="1"
+                               Margin="0,0,20,0"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Bem vindo - "
+                                          TextColor="{StaticResource Key=fundo_form}"
+                                          FontSize="Title"
+                                          FontFamily="SANSATION_LIGHT_ITALIC"/>
+                                    <Span Text="{Binding Login}"
+                                          TextColor="{StaticResource Key=laranja_lb}"
+                                          FontSize="Title"
+                                          FontFamily="SANSATION_BOLD"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                    <TableView Intent="Menu"
+                               IsVisible="{Binding Perfilcartao}">
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout Padding="15,10">
+                                    <Button BackgroundColor="{StaticResource Key=fundo_form}"
+                                            Text="MOVIMENTAR CARTÃO"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Command="{Binding AbrirFecharCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Padding="15,10">
+                                    <Button BackgroundColor="{StaticResource Key=fundo_form}"
+                                            Text="CARDÁPIO"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Command="{Binding CardapioCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Padding="15,10">
+                                    <Button BackgroundColor="{StaticResource Key=fundo_form}"
+                                            Text="EXTRATO CARTÃO"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Command="{Binding ExtratoCartaoCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableView>
+                    <TableView Intent="Menu"
+                               IsVisible="{Binding Perfilmesa}">
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout Padding="15,10">
+                                    <Button BackgroundColor="{StaticResource Key=fundo_form}"
+                                            Text="CARDÁPIO"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Command="{Binding CardapioCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell>
+                                <StackLayout Padding="15,10">
+                                    <Button BackgroundColor="{StaticResource Key=fundo_form}"
+                                            Text="MAPA MESA"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Command="{Binding AtendimentoMesaCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableView>
+                    <TableView Intent="Menu"
+                               IsVisible="{Binding Perfilentregador}">
+                        <TableSection>
+                            <ViewCell>
+                                <StackLayout Padding="15,10">
+                                    <Button BackgroundColor="{StaticResource Key=fundo_form}"
+                                            Text="APONTAR ENTREGAS"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill"
+                                            Command="{Binding ApontarEntregasCommand}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableView>
+                </StackLayout>
+            </ContentPage.Content>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

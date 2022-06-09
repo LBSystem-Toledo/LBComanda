@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.UrlApiPage"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material">
+    
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource Key=fundo_form}"
+           CornerRadius="5"
+           Margin="10"
+           Padding="5"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Center">
+        <StackLayout Orientation="Vertical"
+                     BackgroundColor="{StaticResource Key=fundo_form}">
+            <Entry Placeholder="Url API"
+                   x:Name="txtUrl"
+                   HorizontalTextAlignment="Start"
+                   Text="{Binding Url}"
+                   BackgroundColor="{StaticResource Key=fundo_form}"/>
+            <Button x:Name="btnSalvar"
+                    BackgroundColor="{StaticResource Key=laranja_lb}"
+                    WidthRequest="150"
+                    HeightRequest="40"
+                    Text="SALVAR"   
+                    HorizontalOptions="CenterAndExpand"
+                    Command="{Binding SalvarURLCommand}"/>
+        </StackLayout>
+    </Frame>
+</ContentPage>

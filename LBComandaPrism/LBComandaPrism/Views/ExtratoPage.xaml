@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.ExtratoPage"
+             BackgroundColor="{StaticResource Key=preto_lb}">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="5"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start">
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto">
+                <Grid ColumnDefinitions="50,*"
+                      Grid.ColumnSpan="2">
+                    <ImageButton Source="voltar.png"
+                                 Margin="5,5,5,5"
+                                 WidthRequest="50"
+                                 HeightRequest="50"
+                                 Aspect="AspectFit"
+                                 Command="{Binding VoltarCommand}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale"
+                                                        Value="1" />
+                                        <Setter Property="BackgroundColor"
+                                                        Value="Transparent"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale"
+                                                        Value="0.8" />
+                                        <Setter Property="BackgroundColor"
+                                                        Value="{StaticResource Key=laranja_lb}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </ImageButton>
+                    <Label Text="EXTRATO MESA"
+                           FontSize="Title"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Key=laranja_lb}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Grid.Column="1"
+                           IsVisible="{Binding VerMesa}"/>
+                    <Label Text="EXTRATO CARTÃO"
+                           FontSize="Title"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Key=laranja_lb}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Grid.Column="1"
+                           IsVisible="{Binding VerCartao}"/>
+                </Grid>
+                <Label HorizontalTextAlignment="Center"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Grid.Row="1"
+                       IsVisible="{Binding VerMesa}"
+                       FontFamily="SANSATION_BOLD">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Local: "
+                                  FontSize="Subtitle"
+                                  FontAttributes="Bold"
+                                  TextColor="{StaticResource Key=preto_lb}"/>
+                            <Span Text="{Binding Mesa.Ds_local}"
+                                  FontSize="Subtitle"
+                                  FontAttributes="Bold"
+                                  TextColor="{StaticResource Key=preto_lb}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalTextAlignment="Center"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       IsVisible="{Binding VerMesa}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Nº Mesa: "
+                                  FontSize="Subtitle"
+                                  FontAttributes="Bold"
+                                  TextColor="{StaticResource Key=preto_lb}"/>
+                            <Span Text="{Binding Mesa.Nr_mesa}"
+                                  FontSize="Subtitle"
+                                  FontAttributes="Bold"
+                                  TextColor="{StaticResource Key=preto_lb}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalTextAlignment="Center"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Grid.Row="1"
+                       IsVisible="{Binding VerCartao}"
+                       FontFamily="SANSATION_BOLD">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Nº Cartão: "
+                                  FontSize="Subtitle"
+                                  FontAttributes="Bold"
+                                  TextColor="{StaticResource Key=preto_lb}"/>
+                            <Span Text="{Binding Nr_cartao}"
+                                  FontSize="Subtitle"
+                                  FontAttributes="Bold"
+                                  TextColor="{StaticResource Key=preto_lb}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+        </Frame>
+        <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="5"
+               Grid.Row="1"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand">
+            <Grid RowDefinitions="Auto,Auto,Auto">
+                <Grid BackgroundColor="{StaticResource Key=laranja_lb}"
+                      Padding="5"
+                      ColumnDefinitions="*,*,*,*">
+                    <Label Text="PRODUTO"
+                           TextColor="{StaticResource Key=fundo_form}"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Center"/>
+                    <Label Text="QUANT"
+                           TextColor="{StaticResource Key=fundo_form}"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Center"
+                           Grid.Column="1"/>
+                    <Label Text="VALOR"
+                           TextColor="{StaticResource Key=fundo_form}"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Center"
+                           Grid.Column="2"/>
+                    <Label Text="TOTAL"
+                           TextColor="{StaticResource Key=fundo_form}"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Center"
+                           Grid.Column="3"/>
+                </Grid>
+                <CollectionView ItemsSource="{Binding ItensVenda}"
+                                Grid.Row="1">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*,*,*">
+                                <Label Text="{Binding Ds_produto}"
+                                       TextColor="{StaticResource Key=preto_lb}"
+                                       FontSize="Caption"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding Quantidade, StringFormat='{0:N0}'}"
+                                       TextColor="{StaticResource Key=preto_lb}"
+                                       FontSize="Caption"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="1"/>
+                                <Label Text="{Binding PrecoVenda, StringFormat='{0:C}'}"
+                                       TextColor="{StaticResource Key=preto_lb}"
+                                       FontSize="Caption"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="2"/>
+                                <Label Text="{Binding ValorVenda, StringFormat='{0:C}'}"
+                                       TextColor="{StaticResource Key=preto_lb}"
+                                       FontSize="Caption"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       Grid.Column="3"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <StackLayout HorizontalOptions="CenterAndExpand"
+                                         VerticalOptions="CenterAndExpand">
+                                <Label Text="SEM MOVIMENTO"
+                                       Margin="10,25,10,10"
+                                       FontAttributes="Bold"
+                                       FontSize="Large"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource Key=laranja_lb}"/>
+                            </StackLayout>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+                <Grid Grid.Row="2"
+                      HeightRequest="40"
+                      ColumnDefinitions="*,*"
+                      BackgroundColor="{StaticResource Key=laranja_lb}">
+                    <Label Text="TOTAL EXTRATO:"
+                           WidthRequest="180"
+                           FontSize="Subtitle"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Key=preto_lb}"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding Total, StringFormat='{0:C}'}"
+                           WidthRequest="180"
+                           FontSize="Subtitle"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Key=fundo_form}"
+                           BackgroundColor="{StaticResource preto_lb}"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="EndAndExpand"
+                           Grid.Column="1"/>
+                </Grid>
+            </Grid>
+        </Frame>
+        <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="5"
+               Grid.Row="2"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               IsVisible="{Binding RecVenda}">
+            <Grid HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  ColumnDefinitions="*,*"
+                  Margin="5">
+                <Button Text="CRÉDITO"
+                        FontSize="Subtitle"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="10"
+                        HeightRequest="60"
+                        Command="{Binding CreditoCommand}"/>
+                <Button Text="DÉBITO"
+                        FontSize="Subtitle"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="10"
+                        HeightRequest="60"
+                        Grid.Column="1"
+                        Command="{Binding DebitoCommand}"/>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>

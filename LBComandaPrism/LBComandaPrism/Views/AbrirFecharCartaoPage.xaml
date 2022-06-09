@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:behaviorPack="clr-namespace:Xamarin.Forms.BehaviorValidationPack;assembly=Xamarin.Forms.BehaviorValidationPack"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.AbrirFecharCartaoPage"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="CONSULTAR CARTÃO"
+                     Order="Primary"
+                     Priority="0"
+                     Command="{Binding ConsultarCartaoCommand}"/>
+    </ContentPage.ToolbarItems>
+    <Frame HasShadow="True"
+            BackgroundColor="{StaticResource Key=fundo_form}"
+            CornerRadius="5"
+            Margin="10,0,10,0"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center">
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand"
+              RowDefinitions="120,Auto,Auto,Auto,Auto,Auto">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icone_Transparente.png"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Margin="10,0,0,0"/>
+                <Label HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        FontSize="Large"
+                        FontFamily="SANSATION_BOLD">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="ABRIR"
+                                    FontSize="30"
+                                    TextColor="{StaticResource Key=laranja_lb}"/>
+                            <Span Text=" CARTÃO"
+                                    FontSize="24"
+                                    TextColor="{StaticResource Key=preto_lb}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="1">
+                <Entry Placeholder="Numero Cartão"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                       Keyboard="Numeric"
+                       BackgroundColor="{StaticResource Key=fundo_form}"
+                       Text="{Binding Nr_cartao}"/>
+                <ImageButton Source="scanner.png"
+                             Aspect="AspectFit"
+                             BackgroundColor="Transparent"
+                             Command="{Binding LerQRCodeCommand}"/>
+            </StackLayout>
+            <Entry Placeholder="Celular"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center"
+                   Keyboard="Telephone"
+                   BackgroundColor="{StaticResource Key=fundo_form}"
+                   Text="{Binding Celular}"
+                   Grid.Row="2"
+                   Unfocused="Entry_Unfocused">
+                <Entry.Behaviors>
+                    <behaviorPack:MaskedBehavior Mask="|XX|XXXXX-XXXX"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Entry Placeholder="Nome Cliente"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center"
+                   BackgroundColor="{StaticResource Key=fundo_form}"
+                   Text="{Binding Nome}"
+                   Grid.Row="3"/>
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="4">
+                <Label Text="Cliente Menor Idade?"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       TextColor="Red"
+                       HorizontalOptions="EndAndExpand"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"/>
+                <CheckBox IsChecked="{Binding Menoridade}"
+                          Visual="Material"
+                          VerticalOptions="FillAndExpand"
+                          HorizontalOptions="EndAndExpand">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="{StaticResource Key=preto_lb}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="IsChecked">
+                                <VisualState.Setters>
+                                    <Setter Property="Color" Value="{StaticResource Key=laranja_lb}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </CheckBox>
+            </StackLayout>
+            <Button x:Name="btnSalvar"
+                    Text="ABRIR CARTÃO"
+                    BackgroundColor="{StaticResource Key=laranja_lb}"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    CornerRadius="10"
+                    HeightRequest="60"
+                    Grid.Row="5"
+                    Margin="0,10,0,10"
+                    Command="{Binding SalvarCommand}"/>
+        </Grid>
+    </Frame>
+</ContentPage>

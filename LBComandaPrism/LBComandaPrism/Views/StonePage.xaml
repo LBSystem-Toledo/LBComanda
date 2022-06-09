@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.StonePage"
+             NavigationPage.HasBackButton="False"
+             Title="RECEBER COMANDA"
+             BackgroundColor="{StaticResource Key=preto_lb}">
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource Key=fundo_form}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="5"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="FillAndExpand">
+        <Grid RowDefinitions="Auto,Auto,*,Auto">
+            <Image Source="stone.png"
+                   Aspect="AspectFill"
+                   HorizontalOptions="FillAndExpand"/>
+            <Grid ColumnDefinitions="*,*"
+                  Grid.Row="1">
+                <Label HorizontalOptions="FillAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       FontSize="Title"
+                       TextColor="{StaticResource Key=preto_lb}"
+                       Text="{Binding D_C}"/>
+                <Label HorizontalOptions="FillAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="End"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       FontSize="Title"
+                       Grid.Column="1"
+                       TextColor="{StaticResource Key=preto_lb}"
+                       Text="{Binding Vl_receber, StringFormat='{0:C}'}"/>
+            </Grid>
+            <Label HorizontalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   FontSize="Title"
+                   TextColor="{StaticResource Key=laranja_lb}"
+                   Text="{Binding Mensagem}"
+                   Grid.Row="2"/>
+            <Button x:Name="btnCancelar"
+                    Text="CANCELAR TRANSAÇÃO"
+                    BackgroundColor="{StaticResource Key=preto_lb}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    CornerRadius="10"
+                    Grid.Row="3"
+                    Command="{Binding CancelarCommand}"/>
+        </Grid>
+    </Frame>
+</ContentPage>

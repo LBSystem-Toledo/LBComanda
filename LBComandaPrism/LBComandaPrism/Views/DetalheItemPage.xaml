@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:dxe="http://schemas.devexpress.com/xamarin/2014/forms/editors"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.DetalheItemPage"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material">
+    <StackLayout Orientation="Vertical">
+        <Frame HasShadow="True"
+                   BackgroundColor="{StaticResource Key=fundo_form}"
+                   CornerRadius="5"
+                   Margin="5"
+                   Padding="5"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Start">
+            <Grid ColumnDefinitions="50,*"
+                      RowDefinitions="Auto,Auto">
+                <ImageButton Source="voltar.png"
+                                 Margin="5,5,5,5"
+                                 WidthRequest="50"
+                                 HeightRequest="50"
+                                 Aspect="AspectFit"
+                                 Command="{Binding CancelarCommand}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Scale"
+                                                        Value="1" />
+                                    <Setter Property="BackgroundColor"
+                                                        Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="Scale"
+                                                        Value="0.8" />
+                                    <Setter Property="BackgroundColor"
+                                                        Value="{StaticResource Key=laranja_lb}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </ImageButton>
+                <Label Text="DETALHES PRODUTO"
+                           FontSize="Title"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Key=laranja_lb}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           Grid.Column="1"/>
+                <Label Text="{Binding Produto.Ds_produto}"
+                       FontSize="Subtitle"
+                       TextColor="{StaticResource Key=preto_lb}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Center"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="1"/>
+            </Grid>
+        </Frame>
+        <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="5"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand"
+                         Orientation="Vertical">
+                <StackLayout Orientation="Vertical"
+                             VerticalOptions="StartAndExpand"
+                             IsVisible="{Binding ExisteIngredientes}">
+                    <Label Text="INGREDIENTES"
+                           FontSize="Subtitle"
+                           FontAttributes="Bold"
+                           BackgroundColor="{StaticResource Key=laranja_lb}"
+                           TextColor="{StaticResource Key=preto_lb}"
+                           HorizontalTextAlignment="Center"/>
+                    <CollectionView ItemsSource="{Binding Ingredientes}"
+                                    VerticalOptions="StartAndExpand"
+                                    VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5,0,5,0"
+                                      ColumnDefinitions="*,30">
+                                    <Label Text="{Binding Ds_item}"
+                                           TextColor="{StaticResource Key=preto_lb}"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Start"/>
+                                    <CheckBox IsChecked="{Binding Incluido}"
+                                              IsEnabled="{Binding Habilitar}"
+                                              HorizontalOptions="EndAndExpand"
+                                              VerticalOptions="EndAndExpand"
+                                              Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"
+                             IsVisible="{Binding ExisteAdicionais}">
+                    <Label Text="ADICIONAIS"
+                           FontSize="Subtitle"
+                           BackgroundColor="{StaticResource Key=laranja_lb}"
+                           TextColor="{StaticResource Key=preto_lb}"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"/>
+                    <CollectionView ItemsSource="{Binding Adicionais}"
+                                    VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="5,0,5,0"
+                                      ColumnDefinitions="*,Auto,30">
+                                    <Label Text="{Binding Ds_adicional}"
+                                           TextColor="{StaticResource Key=preto_lb}"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Start"/>
+                                    <Label Text="{Binding PrecoVenda, StringFormat='{0:C}'}"
+                                           TextColor="{StaticResource Key=preto_lb}"
+                                           FontSize="Subtitle"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Grid.Column="1"/>
+                                    <CheckBox IsChecked="{Binding Selecionado}"
+                                              HorizontalOptions="EndAndExpand"
+                                              VerticalOptions="EndAndExpand"
+                                              Grid.Column="2"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"
+                             Spacing="10"
+                             IsVisible="{Binding ExistePontoCarne}">
+                    <Label Text="PONTO DA CARNE"
+                           FontSize="Subtitle"
+                           BackgroundColor="{StaticResource Key=laranja_lb}"
+                           TextColor="{StaticResource Key=preto_lb}"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"/>
+                    <Grid ColumnDefinitions="*,50">
+                        <Picker x:Name="pkPontoCarne"
+                                Title="SELECIONE PONTO DA CARNE"
+                                TitleColor="Red"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="Center"
+                                ItemsSource="{Binding PontoCarne}"
+                                ItemDisplayBinding="{Binding Ds_ponto}"
+                                SelectedItem="{Binding PontoSelecionado}"/>
+                        <ImageButton x:Name="btnLimpar"
+                                     Source="limpar.png"
+                                     HorizontalOptions="End"
+                                     Grid.Column="1"
+                                     Command="{Binding LimparPontoCarneCommand}"/>
+                        </Grid>
+                    </StackLayout>
+                <StackLayout Orientation="Vertical"
+                             Spacing="10"
+                             IsVisible="{Binding ExisteSabores}">
+                    <Label FontSize="Subtitle"
+                           BackgroundColor="{StaticResource Key=laranja_lb}"
+                           TextColor="{StaticResource Key=fundo_form}"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="SABORES"/>
+                                <Span Text=" - "/>
+                                <Span Text="MAX. "/>
+                                <Span Text="{Binding Produto.Max_sabor}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <CollectionView ItemsSource="{Binding Sabores}"
+                                    VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                 HorizontalItemSpacing="5"
+                                 VerticalItemSpacing="5"
+                                 Span="2"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="0,0,0,5">
+                                    <dxe:CheckEdit Label="{Binding Ds_sabor}"
+                                                   LabelFontAttributes="Bold"
+                                                   LabelFontSize="Subtitle"
+                                                   IsChecked="{Binding Incluido}"
+                                                   CheckedChanged="CheckEdit_CheckedChanged"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"
+                             Spacing="10"
+                             IsVisible="{Binding ExisteObs}">
+                    <Label Text="OBSERVAÇÕES"
+                           FontSize="Subtitle"
+                           BackgroundColor="{StaticResource Key=laranja_lb}"
+                           TextColor="{StaticResource Key=preto_lb}"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"/>
+                    <CollectionView ItemsSource="{Binding Observacoes}"
+                                    VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Obs}"
+                                           TextColor="{StaticResource Key=preto_lb}"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Start"/>
+                                    <CheckBox IsChecked="{Binding Marcar}"
+                                              HorizontalOptions="EndAndExpand"
+                                              VerticalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <Button x:Name="btnConfirma"
+                        Text="CONFIRMAR"
+                        CornerRadius="10"
+                        BackgroundColor="{StaticResource Key=laranja_lb}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="40"
+                        Command="{Binding ConfirmarCommand}"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

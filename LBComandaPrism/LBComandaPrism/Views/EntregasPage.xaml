@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:tk="http://xamarin.com/schemas/2020/toolkit"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.EntregasPage"
+             x:Name="pEntrega"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material">
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource Key=fundo_form}"
+           CornerRadius="5"
+           Margin="5"
+           Padding="5"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Start">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <pv:PancakeView VerticalOptions="Start"
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="10"
+                            Padding="10,0,0,0"
+                            IsVisible="{Binding isPromocao}"
+                            BackgroundColor="{StaticResource Key=laranja_lb}">
+                <Label Text="ENTREGAS A REALIZAR"
+                       FontSize="Body"
+                       TextColor="{StaticResource Key=fundo_form}"
+                       FontAttributes="Bold"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+            </pv:PancakeView>
+            <CollectionView HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="FillAndExpand"
+                            SelectionMode="None"
+                            Grid.Row="1"
+                            ItemsSource="{Binding Entregas}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <pv:PancakeView VerticalOptions="StartAndExpand" 
+                                        HorizontalOptions="FillAndExpand"
+                                        BackgroundColor="White">
+                            <Grid VerticalOptions="StartAndExpand"
+                                  HorizontalOptions="FillAndExpand"
+                                  ColumnDefinitions="Auto,*">
+                                <BoxView BackgroundColor="{StaticResource Key=laranja_lb}"
+                                         WidthRequest="3"
+                                         HorizontalOptions="Start"
+                                         VerticalOptions="FillAndExpand"/>
+                                <tk:Expander Grid.Column="1"
+                                             ExpandAnimationEasing="{x:Static Easing.CubicIn}"
+                                             ExpandAnimationLength="500"
+                                             CollapseAnimationEasing="{x:Static Easing.CubicOut}"
+                                             CollapseAnimationLength="500">
+                                    <tk:Expander.Header>
+                                        <Grid ColumnDefinitions="Auto,*,Auto"
+                                              BackgroundColor="AliceBlue">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label Text="Nº Pedido"
+                                                       TextColor="DarkGray"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding Id_prevenda}"
+                                                       TextColor="{StaticResource Key=preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Vertical"
+                                                         Grid.Column="1">
+                                                <Label Text="Cliente"
+                                                       TextColor="DarkGray"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding NM_Clifor}"
+                                                       TextColor="{StaticResource Key=preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <Image Source="SetaBaixo.png"
+                                                   Grid.Column="2"
+                                                   HorizontalOptions="End"
+                                                   VerticalOptions="Start">
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image"
+                                                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type tk:Expander}}, Path=IsExpanded}"
+                                                                 Value="True">
+                                                        <Setter Property="Source"
+                                                                Value="SetaCima.png"/>
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </tk:Expander.Header>
+                                    <StackLayout Orientation="Vertical">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label Text="Endereço"
+                                                       TextColor="DarkGray"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding DS_Endereco}"
+                                                       TextColor="{StaticResource Key=preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Vertical"
+                                                         Grid.Column="1">
+                                                <Label Text="Numero"
+                                                       TextColor="DarkGray"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding Numero}"
+                                                       TextColor="{StaticResource Key=preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </Grid>
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label Text="Bairro"
+                                                       TextColor="DarkGray"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding DS_Endereco}"
+                                                       TextColor="{StaticResource Key=preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </Grid>
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="Complemento"
+                                                   TextColor="DarkGray"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding DS_Complemento}"
+                                                   TextColor="{StaticResource Key=preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="Proximo"
+                                                   TextColor="DarkGray"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Proximo}"
+                                                   TextColor="{StaticResource Key=preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="Observação"
+                                                   TextColor="DarkGray"
+                                                   FontSize="10"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding ObsFecharDelivery}"
+                                                   TextColor="{StaticResource Key=preto_lb}"
+                                                   FontSize="Caption"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                        <Grid ColumnDefinitions="*,*,Auto">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label Text="Maquina Cartão"
+                                                       TextColor="DarkGray"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding ST_LevarMaqCartao}"
+                                                       TextColor="{StaticResource Key=preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Vertical"
+                                                         Grid.Column="1">
+                                                <Label Text="Troca Para"
+                                                       TextColor="DarkGray"
+                                                       FontSize="10"
+                                                       FontAttributes="Bold"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                                <Label Text="{Binding Vl_TrocoPara}"
+                                                       TextColor="{StaticResource Key=preto_lb}"
+                                                       FontSize="Caption"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"/>
+                                            </StackLayout>
+                                            <Button x:Name="btnConfirma"
+                                                    Text="CONFIRMAR"
+                                                    FontAttributes="Bold"
+                                                    CornerRadius="10"
+                                                    Visual="Material"
+                                                    Grid.Column="2"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="FillAndExpand"
+                                                    Command="{Binding BindingContext.ConfirmarEntregaCommand, Source={x:Reference pEntrega}}"
+                                                    CommandParameter="{Binding .}"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </tk:Expander>
+                            </Grid>
+                        </pv:PancakeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button x:Name="btnEntrega"
+                    Text="NOVA ENTREGA"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    Visual="Material"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Grid.Row="2"
+                    Command="{Binding LerQRCodeCommand}"/>
+        </Grid>
+    </Frame>
+</ContentPage>

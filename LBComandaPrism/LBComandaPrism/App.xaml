@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="LBComandaPrism.App">
+    <Application.Resources>
+        <Color x:Key="laranja_lb">#f08b29</Color>
+        <Color x:Key="preto_lb">#1a1a1c</Color>
+        <Color x:Key="fundo_form">#FFFFFF</Color>
+    </Application.Resources>
+</prism:PrismApplication>

@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.CarrinhoPage"
+             x:Name="pCarrinho"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material">
+    <Grid RowDefinitions="Auto,*">
+        <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="5"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Start">
+            <StackLayout Orientation="Horizontal">
+                <ImageButton Source="voltar.png"
+                             Margin="5,5,5,5"
+                             WidthRequest="50"
+                             HeightRequest="50"
+                             Aspect="AspectFit"
+                             HorizontalOptions="Start"
+                             Command="{Binding voltarCommand}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Scale" Value="1" />
+                                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="Scale" Value="0.8" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Key=laranja_lb}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </ImageButton>
+                <Label Text="ITENS CARRINHO"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Key=laranja_lb}"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+            </StackLayout>
+        </Frame>
+        <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="5"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               Grid.Row="1">
+            <Grid RowDefinitions="Auto,40,Auto"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+                <CollectionView ItemsSource="{Binding Carrinho}"
+                                SelectedItem="{Binding ItemSelecionado}"
+                                SelectionMode="Single"
+                                Margin="5">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="{StaticResource Key=laranja_lb}"
+                                   BackgroundColor="{StaticResource Key=fundo_form}"
+                                   CornerRadius="10"
+                                   Margin="0"
+                                   Padding="2"
+                                   HasShadow="True">
+                                <StackLayout Orientation="Vertical"
+                                             VerticalOptions="Fill"
+                                             HorizontalOptions="Fill">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Text="{Binding Ds_produto}"
+                                               TextColor="#1A1A1C"
+                                               FontSize="Small"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                        <StackLayout Orientation="Horizontal"
+                                                     HorizontalOptions="End"
+                                                     Grid.Column="1"
+                                                     Padding="0,0,2,0">
+                                            <ImageButton Source="menos.png"
+                                                         BackgroundColor="{StaticResource Key=fundo_form}"
+                                                         Aspect="AspectFill"
+                                                         WidthRequest="40"
+                                                         HorizontalOptions="Fill"
+                                                         VerticalOptions="Fill"
+                                                         Command="{Binding BindingContext.DelItemCompra, Source={x:Reference pCarrinho}}"
+                                                         CommandParameter="{Binding .}"/>
+                                            <Label Text="{Binding Quantidade}"
+                                                   Padding="0,0,15,0"
+                                                   TextColor="#1A1A1C"
+                                                   FontSize="Large"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center"/>
+                                            <ImageButton Source="somar.png"
+                                                         BackgroundColor="{StaticResource Key=fundo_form}"
+                                                         Aspect="AspectFill"
+                                                         WidthRequest="40"
+                                                         HorizontalOptions="Fill"
+                                                         VerticalOptions="Fill"
+                                                         Command="{Binding BindingContext.AddItemCompra, Source={x:Reference pCarrinho}}"
+                                                         CommandParameter="{Binding .}"/>
+                                        </StackLayout>
+                                    </Grid>
+                                    <Label Text="{Binding IngredientesStr}"
+                                           TextColor="#1A1A1C"
+                                           FontSize="Micro"
+                                           HorizontalOptions="StartAndExpand"
+                                           VerticalOptions="Start"
+                                           HorizontalTextAlignment="Start"
+                                           IsVisible="{Binding ExisteIngredientes}"/>
+                                    <StackLayout Orientation="Vertical"
+                                                 IsVisible="{Binding ExistePontoCarne}">
+                                        <Label Text="PONTO DA CARNE:"
+                                               TextColor="#1A1A1C"
+                                               FontSize="Small"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                        <Label Text="{Binding PontoCarne}"
+                                               TextColor="#1A1A1C"
+                                               FontSize="Micro"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical"
+                                                 IsVisible="{Binding ExisteSabores}">
+                                        <Label Text="SABORES"
+                                               TextColor="#1A1A1C"
+                                               FontSize="Micro"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                        <Label Text="{Binding SaboresStr}"
+                                               TextColor="#1A1A1C"
+                                               FontSize="Micro"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical"
+                                                 IsVisible="{Binding ExisteAdicional}">
+                                        <Label Text="ADICIONAIS:"
+                                               TextColor="#1A1A1C"
+                                               FontSize="Small"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                        <Label Text="{Binding AdicionaisStr}"
+                                               TextColor="#1A1A1C"
+                                               FontSize="Micro"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                    </StackLayout>
+                                    <StackLayout>
+                                        <Label Text="OBSERVAÇÕES:"
+                                               TextColor="#1a1a1c"
+                                               FontSize="Small"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="Start"
+                                               VerticalOptions="Start"
+                                               HorizontalTextAlignment="Start"/>
+                                        <Editor Text="{Binding Obs}"
+                                                MaxLength="1024"
+                                                AutoSize="TextChanges"
+                                                IsSpellCheckEnabled="True"
+                                                IsTextPredictionEnabled="True"
+                                                TextTransform="Uppercase"
+                                                TextColor="#1A1A1C"
+                                                FontSize="Micro"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="Start"
+                                                BackgroundColor="{StaticResource Key=fundo_form}"/>
+                                    </StackLayout>
+                                    <ImageButton Source="delete.png"
+                                                 HorizontalOptions="End"
+                                                 Command="{Binding Source={x:Reference pCarrinho}, Path=BindingContext.removeItemCommand}"
+                                                 CommandParameter="{Binding .}"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout Orientation="Horizontal"
+                             HeightRequest="30"
+                             Margin="5,0,5,0"
+                             Padding="5,0,5,0"
+                             HorizontalOptions="Fill"
+                             VerticalOptions="Fill"
+                             BackgroundColor="{StaticResource Key=laranja_lb}"
+                             Grid.Row="1">
+                    <Label Text="TOTAL CARRINHO"
+                           TextColor="White"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           HorizontalOptions="StartAndExpand"/>
+                    <Label Text="{Binding TotalCarrinho, StringFormat='{0:C}'}"
+                           TextColor="White"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="End"
+                           HorizontalOptions="EndAndExpand"
+                           VerticalTextAlignment="Center"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                             Padding="5">
+                    <Button Text="FECHAR COMANDA"
+                            FontSize="Subtitle"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            TextColor="White"
+                            BackgroundColor="{StaticResource Key=preto_lb}"
+                            HorizontalOptions="Center"
+                            Command="{Binding fecharCommand}"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </Grid>
+</ContentPage>

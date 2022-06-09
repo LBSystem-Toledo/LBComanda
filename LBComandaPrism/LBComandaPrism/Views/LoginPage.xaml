@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:behaviorPack="clr-namespace:Xamarin.Forms.BehaviorValidationPack;assembly=Xamarin.Forms.BehaviorValidationPack"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             x:Class="LBComandaPrism.Views.LoginPage"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material">
+    <Frame HasShadow="True"
+           BackgroundColor="{StaticResource Key=fundo_form}"
+           CornerRadius="5"
+           Margin="10,0,10,0"
+           Padding="0"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="Center">
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand"
+              RowDefinitions="120,*">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icone_Transparente.png"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Margin="10,0,0,0"/>
+                <Label HorizontalOptions="StartAndExpand"
+                        VerticalOptions="Center"
+                        FontSize="Large"
+                        FontFamily="SANSATION_BOLD">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="LB"
+                                    FontSize="30"
+                                    TextColor="{StaticResource Key=laranja_lb}"/>
+                            <Span Text=" Foods"
+                                    FontSize="24"
+                                    TextColor="{StaticResource Key=preto_lb}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout Orientation="Vertical"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Center"
+                         Margin="20"
+                         Grid.Row="1">
+                <Entry Placeholder="Login"
+                       Text="{Binding Login}"
+                       HorizontalOptions="FillAndExpand"
+                       BackgroundColor="{StaticResource Key=fundo_form}"/>
+                <Entry Placeholder="Senha"
+                       Text="{Binding Senha}"
+                       IsPassword="True" 
+                       HorizontalOptions="FillAndExpand"
+                       BackgroundColor="{StaticResource Key=fundo_form}"/>
+                <Entry x:Name="txtCnpj"
+                       Placeholder="CNPJ Empresa"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                       Keyboard="Numeric"
+                       BackgroundColor="{StaticResource Key=fundo_form}"
+                       Text="{Binding Cnpj}">
+                    <Entry.Behaviors>
+                        <behaviorPack:CNPJValidationBehavior/>
+                        <behaviorPack:MaskedBehavior Mask="XX.XXX.XXX/XXXX-XX"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Grid HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      ColumnDefinitions="*,*"
+                      Margin="10,10,10,0">
+                    <Button x:Name="btnSair"
+                            Text="SAIR"
+                            BackgroundColor="{StaticResource Key=preto_lb}"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="10"
+                            HeightRequest="60"
+                            Command="{Binding SairCommand}"/>
+                    <Button x:Name="btnSalvar"
+                            Text="LOGIN"
+                            BackgroundColor="{StaticResource Key=laranja_lb}"
+                            FontAttributes="Bold"
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="10"
+                            HeightRequest="60"
+                            Grid.Column="1"
+                            Command="{Binding LoginCommand}"/>
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentPage>

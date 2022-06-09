@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LBComandaPrism.Views.MapaMesaPage"
+             x:Name="pMesa"
+             BackgroundColor="{StaticResource Key=preto_lb}"
+             Visual="Material"
+             Title="MAPA MESA">
+    <Frame HasShadow="True"
+               BackgroundColor="{StaticResource Key=fundo_form}"
+               CornerRadius="5"
+               Margin="5"
+               Padding="0"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand">
+        <Grid RowDefinitions="Auto,*">
+            <Picker x:Name="pkLocal"
+                    Title="LOCAL MESA"
+                    FontSize="16"
+                    Margin="5,5,5,0"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{StaticResource Key=laranja_lb}"
+                    ItemsSource="{Binding Locais}"
+                    ItemDisplayBinding="{Binding Ds_local}"
+                    SelectedItem="{Binding Localcorrente}"/>
+            <CollectionView x:Name="cvMesa"
+                            Margin="5"
+                            Grid.Row="1"
+                            ItemsSource="{Binding Mesas}"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     HorizontalItemSpacing="5"
+                                     VerticalItemSpacing="5"
+                                     Span="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="{StaticResource Key=laranja_lb}"
+                               CornerRadius="5"
+                               HasShadow="True"
+                               Padding="5">
+                            <Button Text="{Binding Nr_mesa}"
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Fill"
+                                    BackgroundColor="{Binding CorBotao}"
+                                    Command="{Binding Source={x:Reference pMesa}, Path=BindingContext.MesaCommand}"
+                                    CommandParameter="{Binding .}"/>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Frame>
+</ContentPage>
