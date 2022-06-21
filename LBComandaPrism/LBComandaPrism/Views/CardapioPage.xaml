@@ -23,7 +23,7 @@
                VerticalOptions="FillAndExpand">
             <Grid RowDefinitions="Auto,*,Auto">
                 <Frame HasShadow="True"
-                       BackgroundColor="LightGray"
+                       BackgroundColor="Gray"
                        CornerRadius="5"
                        Margin="10"
                        Padding="2"
@@ -38,7 +38,7 @@
                                 FontSize="16"
                                 HorizontalOptions="FillAndExpand"
                                 Grid.ColumnSpan="2"
-                                BackgroundColor="LightGray"
+                                BackgroundColor="Gray"
                                 ItemsSource="{Binding Grupos}"
                                 ItemDisplayBinding="{Binding Ds_grupo}"
                                 SelectedItem="{Binding Grupocorrente}"/>
@@ -46,6 +46,9 @@
                                    Grid.Row="1"
                                    Text="{Binding Filtroproduto}"
                                    Placeholder="Nome Produto"
+                                   PlaceholderColor="{StaticResource preto_lb}"
+                                   CancelButtonColor="{StaticResource preto_lb}"
+                                   TextColor="{StaticResource preto_lb}"
                                    SearchCommand="{Binding BuscarCommand}"/>
                         <ImageButton Source="lupa.png"
                                      CornerRadius="100"
@@ -165,10 +168,10 @@
                     </dxc:DXCollectionView.GroupDescription>
                     <dxc:DXCollectionView.GroupHeaderTemplate>
                         <DataTemplate>
-                            <StackLayout Margin="2,0,18,10">
+                            <StackLayout Margin="2">
                                 <Label Text="{Binding Value}"
                                        FontSize="Subtitle"
-                                       TextColor="{StaticResource Key=preto_lb}"
+                                       BackgroundColor="{StaticResource Key=laranja_lb}"
                                        HorizontalOptions="FillAndExpand"
                                        HorizontalTextAlignment="Center"
                                        FontAttributes="Bold"/>

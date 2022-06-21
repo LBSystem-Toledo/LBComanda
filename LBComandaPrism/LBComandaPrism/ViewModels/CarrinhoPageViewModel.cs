@@ -84,26 +84,9 @@ namespace LBComandaPrism.ViewModels
                         Carrinho.ForEach(p => p.Cd_garcom = App.Garcom.Cd_garcom);
                         if (App.Garcom.Tp_cartao.Trim().Equals("0"))
                         {
-                            if (App.Garcom.LerQRCodeAPP)
-                            {
-                                //Comanda Cartão
-                                var scanner = DependencyService.Get<IQrCodeScanningService>();
-                                var result = await scanner.ScanAsync();
-                                if (!string.IsNullOrWhiteSpace(result))
-                                    try
-                                    {
-                                        var retorno = await DataService.GravarComandaCartaoAsync(result, Carrinho.ToList());
-                                        if (retorno)
-                                        {
-                                            await dialogService.DisplayAlertAsync("Mensagem", "Comanda gravada com sucesso.", "OK");
-                                            await navigationService.NavigateAsync("/MenuPage/NavigationPage/CardapioPage");
-                                        }
-                                        else await dialogService.DisplayAlertAsync("Mensagem", "Erro gravar comanda.", "OK");
-                                    }
-                                    catch (Exception ex) { await dialogService.DisplayAlertAsync("Erro", ex.Message.Trim(), "OK"); }
-                                else await navigationService.NavigateAsync("NumeroCartaoPage");
-                            }
-                            else await navigationService.NavigateAsync("NumeroCartaoPage");
+                            NavigationParameters param = new NavigationParameters();
+                            param.Add("CARRINHO", Carrinho.ToList());
+                            await navigationService.NavigateAsync("NumeroCartaoPage", param);
                         }
                         else
                         {

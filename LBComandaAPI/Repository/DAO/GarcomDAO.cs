@@ -38,7 +38,7 @@ namespace LBComandaAPI.Repository.DAO
                     sql = new StringBuilder();
                     sql.AppendLine("select a.CD_Empresa, a.CD_Clifor as Cd_Garcom, c.LerQRCodeAPP,")
                         .AppendLine("a.NM_Clifor as NM_Garcom, a.ExigirTokenApp, a.ST_Entregador,")
-                        .AppendLine("c.tp_cartao, c.nr_cartaorotini, c.nr_cartaorotfin, d.Stone_id")
+                        .AppendLine("c.tp_cartao, c.nr_cartaorotini, c.nr_cartaorotfin, c.st_mesacartao, d.Stone_id")
                         .AppendLine("from VTB_FIN_CLIFOR a")
                         .AppendLine("inner join VTB_DIV_Empresa b ")
                         .AppendLine("on a.cd_empresa = b.cd_empresa ")

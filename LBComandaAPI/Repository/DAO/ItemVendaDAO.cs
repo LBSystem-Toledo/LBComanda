@@ -152,6 +152,7 @@ namespace LBComandaAPI.Repository.DAO
                             param.Add("@P_IMPRESSO", false);
                             param.Add("@P_PONTOCARNE", p.PontoCarne);
                             param.Add("@P_PEDIDOAPP", true);
+                            param.Add("@P_NR_MESACARTAO", null);
                             param.Add("@P_ST_REGISTRO", "A");
                             param.Add("@P_MOTIVOCANC", null);
                             await conexao._conexao.ExecuteAsync("IA_RES_ITENSPREVENDA", param, transaction: t, commandType: CommandType.StoredProcedure);
@@ -325,6 +326,7 @@ namespace LBComandaAPI.Repository.DAO
                             param.Add("@P_IMPRESSO", false);
                             param.Add("@P_PONTOCARNE", p.PontoCarne);
                             param.Add("@P_PEDIDOAPP", true);
+                            param.Add("@P_NR_MESACARTAO", p.Nr_mesacartao);
                             param.Add("@P_ST_REGISTRO", "A");
                             param.Add("@P_MOTIVOCANC", null);
                             await conexao._conexao.ExecuteAsync("IA_RES_ITENSPREVENDA", param, transaction: t, commandType: CommandType.StoredProcedure);

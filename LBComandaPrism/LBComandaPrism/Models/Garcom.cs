@@ -12,6 +12,7 @@ namespace LBComandaPrism.Models
         public bool ExigirTokenApp { get; set; } = false;
         public bool ST_Entregador { get; set; } = false;
         public bool LerQRCodeAPP { get; set; } = false;
+        public bool St_mesacartao { get; set; } = false;
         public Token Token { get; set; }
         public string Login { get; set; } = string.Empty;
         public string Tp_cartao { get; set; } = string.Empty;

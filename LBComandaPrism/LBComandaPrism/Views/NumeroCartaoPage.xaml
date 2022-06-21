@@ -45,7 +45,16 @@
                        VerticalOptions="Center"
                        Keyboard="Numeric"
                        BackgroundColor="{StaticResource Key=fundo_form}"
+                       IsEnabled="{Binding EnableCartao}"
                        Text="{Binding Nr_cartao}"/>
+                <Entry Placeholder="Numero Mesa"
+                       FontSize="Large"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center"
+                       Keyboard="Numeric"
+                       BackgroundColor="{StaticResource Key=fundo_form}"
+                       IsVisible="{Binding VisibleMesa}"
+                       Text="{Binding Nr_mesa}"/>
                 <Button x:Name="btnSalvar"
                         Text="CONFIRMAR"
                         BackgroundColor="{StaticResource Key=laranja_lb}"

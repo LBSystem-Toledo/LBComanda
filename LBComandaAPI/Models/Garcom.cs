@@ -8,6 +8,7 @@
         public bool ExigirTokenApp { get; set; } = false;
         public bool ST_Entregador { get; set; } = false;
         public bool LerQRCodeAPP { get; set; } = false;
+        public bool St_mesacartao { get; set; } = false;
         public Token Token { get; set; }
         public string Tp_cartao { get; set; } = string.Empty;
         public int Nr_cartaorotini { get; set; }

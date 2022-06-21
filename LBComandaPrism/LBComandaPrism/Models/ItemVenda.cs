@@ -20,6 +20,8 @@ namespace LBComandaPrism.Models
         public string Obs { get { return _obs; } set { SetProperty(ref _obs, value); } }
         private string _pontocarne = string.Empty;
         public string PontoCarne { get { return _pontocarne; } set { SetProperty(ref _pontocarne, value); } }
+        private string _nr_mesacartao = string.Empty;
+        public string Nr_mesacartao { get { return _nr_mesacartao; } set { SetProperty(ref _nr_mesacartao, value); } }
         public bool ExistePontoCarne => !string.IsNullOrWhiteSpace(PontoCarne);
         public bool ExisteObs => !string.IsNullOrWhiteSpace(Obs);
         public bool ExisteIngredientes => Ingredientes.Count > 0;

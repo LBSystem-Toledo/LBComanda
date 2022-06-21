@@ -14,6 +14,7 @@ namespace LBComandaAPI.Models
         public decimal PrecoVenda { get; set; } = decimal.Zero;
         public string Obs { get; set; } = string.Empty;
         public string PontoCarne { get; set; } = string.Empty;
+        public string Nr_mesacartao { get; set; } = string.Empty;
         public List<Adicional> Adicionais { get; set; } = new List<Adicional>();
         public List<Ingredientes> Ingredientes { get; set; } = new List<Ingredientes>();
         public List<Ingredientes> IngredientesDel { get; set; } = new List<Ingredientes>();

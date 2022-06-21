@@ -12,7 +12,7 @@
     <RootNamespace>LBComandaPrism.Droid</RootNamespace>
     <AssemblyName>LBComandaPrism.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidUseIntermediateDesignerFile>true</AndroidUseIntermediateDesignerFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
@@ -86,7 +86,7 @@
       <Version>21.2.5</Version>
     </PackageReference>
     <PackageReference Include="LiteDB">
-      <Version>5.0.11</Version>
+      <Version>5.0.12</Version>
     </PackageReference>
     <PackageReference Include="Matcha.BackgroundService">
       <Version>1.0.5478</Version>
@@ -98,16 +98,16 @@
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="RestSharp">
-      <Version>107.3.0</Version>
+      <Version>108.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Connectivity">
       <Version>3.2.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>2.0.1</Version>
+      <Version>2.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
-    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.7.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478" />
+    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.7.3.2" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="8.1.97" />
     <PackageReference Include="Xamarin.Forms.BehaviorValidationPack">
       <Version>1.1.1</Version>
@@ -116,7 +116,7 @@
       <Version>2.3.0.759</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>5.0.0.2401</Version>
+      <Version>5.0.0.2478</Version>
     </PackageReference>
     <PackageReference Include="ZXing.Net.Mobile">
       <Version>2.4.1</Version>
