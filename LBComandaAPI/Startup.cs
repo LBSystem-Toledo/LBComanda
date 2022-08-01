@@ -35,6 +35,7 @@ namespace LBComandaAPI
             services.AddTransient<IEntrega, EntregaDAO>();
             services.AddTransient<ICartao, CartaoDAO>();
             services.AddTransient<IRecVenda, RecVendaDAO>();
+            services.AddTransient<IItemExcluir, ItemExcluirDAO>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

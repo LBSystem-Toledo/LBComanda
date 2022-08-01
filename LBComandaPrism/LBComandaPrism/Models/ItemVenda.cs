@@ -38,6 +38,20 @@ namespace LBComandaPrism.Models
                 else return string.Empty;
             }
         }
+        public bool ExisteItensExcluir => ItensExcluir.Count > 0;
+        public string ItensExcluirStr
+        {
+            get
+            {
+                if (ItensExcluir.Count > 0)
+                {
+                    string s = string.Empty;
+                    ItensExcluir.ForEach(p => s += (string.IsNullOrWhiteSpace(s) ? string.Empty : ",") + p.Ds_item.Trim());
+                    return s;
+                }
+                else return string.Empty;
+            }
+        }
         public bool ExisteAdicional => Adicionais.Count > 0;
         public string AdicionaisStr
         {
@@ -72,6 +86,8 @@ namespace LBComandaPrism.Models
         public List<Ingredientes> Ingredientes { get { return _ingredientes; } set { SetProperty(ref _ingredientes, value); } }
         private List<Ingredientes> _ingredientesdel = new List<Ingredientes>();
         public List<Ingredientes> IngredientesDel { get { return _ingredientesdel; } set { SetProperty(ref _ingredientesdel, value); } }
+        private List<ItemExcluir> _itensexcluir = new List<ItemExcluir>();
+        public List<ItemExcluir> ItensExcluir { get { return _itensexcluir; } set { SetProperty(ref _itensexcluir, value); } }
         private List<Sabor> _sabores = new List<Sabor>();
         public List<Sabor> Sabores { get { return _sabores; } set { SetProperty(ref _sabores, value); } }
     }

@@ -28,11 +28,12 @@ namespace LBComandaPrism
         public static Garcom Garcom { get; set; } = new Garcom();
 
         #if (DEBUG)
-            public const string url_api = "http://192.168.1.109:45455";
+            public const string url_api = "http://192.168.1.106:45455";
             //public const string url_api = "http://177.107.125.182:33209/reshomolog";
         #else
-        //public const string url_api = "http://177.107.125.182:33209/restaurante";
-        public const string url_api = "http://177.107.125.182:33209/reshomolog";
+            //public const string url_api = "http://177.107.125.182:33209/restaurante";
+            //public const string url_api = "http://177.107.125.182:33209/reshomolog";
+            public const string url_api = "http://192.168.0.160/comanda";
         #endif
 
         public App(IPlatformInitializer initializer)

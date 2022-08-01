@@ -18,6 +18,7 @@ namespace LBComandaAPI.Models
         public List<Adicional> Adicionais { get; set; } = new List<Adicional>();
         public List<Ingredientes> Ingredientes { get; set; } = new List<Ingredientes>();
         public List<Ingredientes> IngredientesDel { get; set; } = new List<Ingredientes>();
+        public List<ItemExcluir> ItensExcluir { get; set; } = new List<ItemExcluir>();
         public List<Sabor> Sabores { get; set; } = new List<Sabor>();
     }
 }

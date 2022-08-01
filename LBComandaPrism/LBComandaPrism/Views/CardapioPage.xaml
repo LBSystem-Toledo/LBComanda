@@ -164,7 +164,8 @@
                         </DataTemplate>
                     </dxc:DXCollectionView.ItemTemplate>
                     <dxc:DXCollectionView.GroupDescription>
-                        <dxc:GroupDescription FieldName="Ds_grupo"/>
+                        <dxc:GroupDescription FieldName="Ds_grupo" 
+                                              SortOrder="Descending"/>
                     </dxc:DXCollectionView.GroupDescription>
                     <dxc:DXCollectionView.GroupHeaderTemplate>
                         <DataTemplate>

@@ -17,6 +17,8 @@ namespace LBComandaPrism.ViewModels
 
         private ObservableCollection<Ingredientes> _ingredientes;
         public ObservableCollection<Ingredientes> Ingredientes { get { return _ingredientes; } set { SetProperty(ref _ingredientes, value); } }
+        private ObservableCollection<ItemExcluir> _itensexcluir;
+        public ObservableCollection<ItemExcluir> ItensExcluir { get { return _itensexcluir; } set { SetProperty(ref _itensexcluir, value); } }
         private ObservableCollection<Adicional> _adicionais;
         public ObservableCollection<Adicional> Adicionais { get { return _adicionais; } set { SetProperty(ref _adicionais, value); } }
         private ObservableCollection<PontoCarne> _pontocarne;
@@ -30,6 +32,8 @@ namespace LBComandaPrism.ViewModels
         public string ObsItem { get; set; } = string.Empty;
         private bool _existeingredientes = false;
         public bool ExisteIngredientes { get { return _existeingredientes; } set { SetProperty(ref _existeingredientes, value); } }
+        private bool _existeitensexcluir = false;
+        public bool ExisteItensExcluir { get { return _existeitensexcluir; } set { SetProperty(ref _existeitensexcluir, value); } }
         private bool _existeadicionais = false;
         public bool ExisteAdicionais
         {
@@ -69,6 +73,11 @@ namespace LBComandaPrism.ViewModels
                     if (p.Incluido)
                         it.Ingredientes.Add(p);
                     else it.IngredientesDel.Add(p);
+                });
+                ItensExcluir?.ForEach(p =>
+                {
+                    if (p.Selecionado)
+                        it.ItensExcluir.Add(p);
                 });
                 Adicionais?.ForEach(p =>
                 {
@@ -114,6 +123,12 @@ namespace LBComandaPrism.ViewModels
                 {
                     Ingredientes = new ObservableCollection<Ingredientes>(ingredientes);
                     ExisteIngredientes = true;
+                }
+                List<ItemExcluir> itensexcluir = await DataService.GetItensExcluirAsync(Produto.Cd_grupo);
+                if(itensexcluir.Count > 0)
+                {
+                    ItensExcluir = new ObservableCollection<ItemExcluir>(itensexcluir);
+                    ExisteItensExcluir = true;
                 }
                 List<Adicional> adicionais = await DataService.GetAdicionaisAsync(Produto.Cd_produto);
                 if (adicionais.Count > 0)

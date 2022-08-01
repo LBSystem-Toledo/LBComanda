@@ -43,6 +43,18 @@ namespace LBComandaAPI.Controllers
             }
             catch { return BadRequest(); }
         }
+        [HttpPost, Route("GravarComandaValeFestaAsync")]
+        public async Task<IActionResult> GravarComandaValeFestaAsync([FromBody] List<ItemVenda> items)
+        {
+            if (!Request.Headers.ContainsKey("token"))
+                return StatusCode(500, "Acesso não autorizado");
+            try
+            {
+                var ret = await _itemDAO.GravarItensAsync(Request.Headers["token"].ToString(), items);
+                return Ok(ret);
+            }
+            catch { return BadRequest(); }
+        }
         [HttpPost, Route("GravarComandaMesaAsync")]
         public async Task<IActionResult> GravarItensAsync(string Id_local,
                                                           string Id_mesa,
@@ -69,6 +81,19 @@ namespace LBComandaAPI.Controllers
                 return Ok(ret);
             }
             catch(Exception ex) { return BadRequest(ex.Message); }
+        }
+        [HttpPost, Route("GravarComandaBalcaoAsync")]
+        public async Task<IActionResult> GravarComandaBalcaoAsync([FromQuery] string ClienteBalcao,
+                                                                  [FromBody] List<ItemVenda> items)
+        {
+            if (!Request.Headers.ContainsKey("token"))
+                return StatusCode(500, "Acesso não autorizado");
+            try
+            {
+                var ret = await _itemDAO.GravarItensBalcaoAsync(Request.Headers["token"].ToString(), ClienteBalcao, items);
+                return Ok(ret);
+            }
+            catch (Exception ex) { return BadRequest(ex.Message); }
         }
     }
 }

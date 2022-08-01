@@ -80,6 +80,7 @@ namespace LBComandaAPI.Repository.DAO
                             param.Add("@P_CD_EMPRESA", cd_empresa);
                             param.Add("@P_ID_CARTAO", dbType: DbType.Decimal, direction: ParameterDirection.Output);
                             param.Add("@P_CD_CLIFOR", cd_clifor);
+                            param.Add("@P_NM_CLIFOR", Nome);
                             param.Add("@P_ID_MESA", null);
                             param.Add("@P_ID_LOCAL", null);
                             param.Add("@P_NR_CARTAO", Nr_cartao);
@@ -111,9 +112,9 @@ namespace LBComandaAPI.Repository.DAO
                             param.Add("@P_MOTIVOCANC", null);
                             param.Add("@P_HR_CLIENTERETIRA", null);
                             param.Add("@P_RECEBERRETIRADA", null);
-                            param.Add("@P_VL_TAXAENTREGA", null);
                             param.Add("@P_ID_CAIXA", null);
                             param.Add("@P_IDIFOOD", null);
+                            param.Add("@P_TROCABALCAOMESA", null);
                             await conexao._conexao.ExecuteAsync("IA_RES_PREVENDA", param, commandType: CommandType.StoredProcedure, transaction: t);
                             t.Commit();
                             return true;

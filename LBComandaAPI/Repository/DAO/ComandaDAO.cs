@@ -22,9 +22,11 @@ namespace LBComandaAPI.Repository.DAO
                 StringBuilder sql = new StringBuilder();
                 sql.AppendLine("select g.TP_Impressora, g.Porta_Imp, c.id_cartao, i.NR_Mesa, h.DS_Local,")
                     .AppendLine("j.NM_Clifor as NM_Garcom, d.Quantidade, e.DS_Produto, d.PontoCarne, d.ObsItem,")
-                    .AppendLine("d.CD_Empresa, d.ID_PreVenda, d.ID_Item")
+                    .AppendLine("d.CD_Empresa, d.ID_PreVenda, d.ID_Item, c.NR_Cartao, d.NR_MesaCartao,")
+                    .AppendLine("a.ST_ClienteRetira, c.nm_clifor as ClienteBalcao,")
+                    .AppendLine("case when d.ID_ItemPaiAdic is null then 0 else 1 end as Adicional")
                     .AppendLine("from TB_RES_PreVenda a")
-                    .AppendLine("inner join TB_RES_Cartao c")
+                    .AppendLine("inner join VTB_RES_Cartao c")
                     .AppendLine("on a.CD_Empresa = c.CD_Empresa")
                     .AppendLine("and a.ID_Cartao = c.ID_Cartao")
                     .AppendLine("and ISNULL(c.ST_Registro, 'A') = 'A'")
@@ -67,6 +69,14 @@ namespace LBComandaAPI.Repository.DAO
                                 .AppendLine("and id_prevenda = " + c.Id_prevenda.ToString())
                                 .AppendLine("and id_item = " + c.Id_item.ToString());
                             c.Ingredientes = await conexao._conexao.QueryAsync<Ingredientes>(sql.ToString());
+                            //Itens Excluir
+                            sql = new StringBuilder();
+                            sql.AppendLine("select DS_ItemExcluir as Ds_item")
+                                .AppendLine("from TB_RES_ItensPreVenda_ItemExcluir")
+                                .AppendLine("where CD_Empresa = '" + c.Cd_empresa.Trim() + "'")
+                                .AppendLine("and ID_PreVenda = " + c.Id_prevenda.ToString())
+                                .AppendLine("and ID_Item = " + c.Id_item.ToString());
+                            c.ItensExcluir = await conexao._conexao.QueryAsync<ItemExcluir>(sql.ToString());
                             //Sabor
                             sql = new StringBuilder();
                             sql.AppendLine("select DS_Sabor")

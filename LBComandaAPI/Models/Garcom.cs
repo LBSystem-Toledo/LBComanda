@@ -3,6 +3,8 @@
     public class Garcom
     {
         public string Cd_empresa { get; set; } = string.Empty;
+        public string Nm_empresa { get; set; } = string.Empty;
+        public string Endereco_empresa { get; set; } = string.Empty;
         public string Cd_garcom { get; set; } = string.Empty;
         public string Nm_garcom { get; set; } = string.Empty;
         public bool ExigirTokenApp { get; set; } = false;

@@ -4,6 +4,9 @@ namespace LBComandaPrism.Models
 {
     public class Garcom: BindableBase
     {
+        public string Cd_empresa { get; set; } = string.Empty;
+        public string Nm_empresa { get; set; } = string.Empty;
+        public string Endereco_empresa { get; set; } = string.Empty;
         private string _cd_garcom = string.Empty;
         public string Cd_garcom { get { return _cd_garcom; } set { SetProperty(ref _cd_garcom, value); } }
         private string _nm_garcom = string.Empty;
@@ -19,5 +22,6 @@ namespace LBComandaPrism.Models
         public int Nr_cartaorotini { get; set; }
         public int Nr_cartaorotfin { get; set; }
         public string Stone_id { get; set; } = string.Empty;
+        public string Impressora { get; set; } = string.Empty;
     }
 }

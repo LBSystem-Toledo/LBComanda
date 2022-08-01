@@ -11,7 +11,7 @@ namespace LBComandaAPI.Controllers
     {
         private readonly IGarcom _garcomDAO;
         public GarcomController(IGarcom garcomDAO) { _garcomDAO = garcomDAO; }
-        
+
         [HttpGet, Route("ValidarGarcomAsync")]
         public async Task<IActionResult> ValidarGarcomAsync()
         {

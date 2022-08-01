@@ -71,7 +71,8 @@ namespace LBComandaAPI.Repository.DAO
                     .AppendLine("(")
                     .AppendLine("	select top 1 x.CD_Empresa, x.CD_TabelaPreco")
                     .AppendLine("	from TB_RES_Config x")
-                    .AppendLine(") as cfg");
+                    .AppendLine(") as cfg")
+                    .AppendLine("order by a.cd_grupo");
 
                 using (TConexao conexao = new TConexao(_config.GetConnectionString(Encoding.UTF8.GetString(Convert.FromBase64String(token)))))
                 {

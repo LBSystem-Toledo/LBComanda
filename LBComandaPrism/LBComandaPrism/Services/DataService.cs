@@ -5,7 +5,6 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -147,6 +146,22 @@ namespace LBComandaPrism.Services
             }
             catch { return null; }
         }
+        public static async Task<List<ItemExcluir>> GetItensExcluirAsync(string Cd_grupo)
+        {
+            try
+            {
+                using (var client = new RestClient(App.url_api))
+                {
+                    var request = new RestRequest("/api/ItemExcluir/GetItemExcluirAsync?Cd_grupo=" + Cd_grupo.Trim(), Method.Get);
+                    request.AddHeader("token", Convert.ToBase64String(Encoding.UTF8.GetBytes(App.Garcom.Cnpj.SoNumero())));
+                    RestResponse response = await client.ExecuteAsync(request);
+                    if (response.IsSuccessful)
+                        return JsonConvert.DeserializeObject<List<ItemExcluir>>(response.Content);
+                    else return null;
+                }
+            }
+            catch { return null; }
+        }
         public static async Task<List<Ingredientes>> GetIngredientesAsync(string Cd_produto)
         {
             try
@@ -277,6 +292,41 @@ namespace LBComandaPrism.Services
                 }
             }
             catch(Exception ex) { throw new Exception(ex.Message.Trim()); }
+        }
+        public static async Task<bool> GravarComandaBalcaoAsync(string ClienteBalcao,
+                                                                List<ItemVenda> items)
+        {
+            try
+            {
+                using (var client = new RestClient(App.url_api))
+                {
+                    var request = new RestRequest("/api/ItemVenda/GravarComandaBalcaoAsync?ClienteBalcao=" + ClienteBalcao, Method.Post);
+                    request.AddHeader("token", Convert.ToBase64String(Encoding.UTF8.GetBytes(App.Garcom.Cnpj.SoNumero())))
+                        .AddJsonBody<List<ItemVenda>>(items);
+                    RestResponse response = await client.ExecuteAsync(request);
+                    if (response.IsSuccessful)
+                        return JsonConvert.DeserializeObject<bool>(response.Content);
+                    else throw new Exception(JsonConvert.DeserializeObject<string>(response.Content));
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message.Trim()); }
+        }
+        public static async Task<bool> GravarComandaValeFestaAsync(List<ItemVenda> items)
+        {
+            try
+            {
+                using (var client = new RestClient(App.url_api))
+                {
+                    var request = new RestRequest("/api/ItemVenda/GravarComandaValeFestaAsync", Method.Post);
+                    request.AddHeader("token", Convert.ToBase64String(Encoding.UTF8.GetBytes(App.Garcom.Cnpj.SoNumero())))
+                        .AddJsonBody<List<ItemVenda>>(items);
+                    RestResponse response = await client.ExecuteAsync(request);
+                    if (response.IsSuccessful)
+                        return JsonConvert.DeserializeObject<bool>(response.Content);
+                    else throw new Exception(JsonConvert.DeserializeObject<string>(response.Content));
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message.Trim()); }
         }
         public static async Task<Entrega> ApontarEntregaAsync(string id_prevenda)
         {
